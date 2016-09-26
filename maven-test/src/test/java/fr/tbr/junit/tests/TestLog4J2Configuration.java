@@ -21,8 +21,6 @@ public class TestLog4J2Configuration {
 		logger.trace("low level");
 		logger.error("error test");
 		
-		logger.de
-		
 	}
 	
 
