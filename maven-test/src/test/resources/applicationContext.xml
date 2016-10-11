@@ -36,6 +36,8 @@
             </list>
         </property>    
     </bean>
+    
+    <bean id="hibernateDAO" class="fr.tbr.iamcore.services.HibernateDAO" />
  
 
 </beans>
