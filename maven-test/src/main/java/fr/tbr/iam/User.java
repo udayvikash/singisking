@@ -37,5 +37,17 @@ public class User {
 	public final void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+	/**
+	 * @return the lastName
+	 */
+	public String getLastName() {
+		return lastName;
+	}
+	/**
+	 * @param lastName the lastName to set
+	 */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
 }

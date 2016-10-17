@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.tbr.iam.log.impl;
+package fr.tbr.iam.log;
 
 import org.apache.logging.log4j.core.Logger;
 import org.apache.logging.log4j.core.LoggerContext;
@@ -22,7 +22,6 @@ public class IAMLoggerLog4j2Impl extends Logger implements IAMLogger {
 	 */
 	protected IAMLoggerLog4j2Impl(LoggerContext context, String name, MessageFactory messageFactory) {
 		super(context, name, messageFactory);
-		// TODO Auto-generated constructor stub
 	}
 
 }

@@ -18,11 +18,7 @@ public class IAMLogManager {
 	private static final Logger logger = LogManager.getLogger(IAMLogManager.class);
 	
 	
-	/**
-	 * 
-	 * @param clazz
-	 * @return
-	 */
+
 	public static IAMLogger getIAMLogger(Class<?> clazz){
 		LoggerContext context = (LoggerContext) LogManager.getContext(clazz.getClassLoader(), false);
 		return new IAMLoggerLog4j2Impl(context, clazz.getName(), logger.getMessageFactory());

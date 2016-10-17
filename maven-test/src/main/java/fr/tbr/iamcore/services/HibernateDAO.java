@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.tbr.iam.datamodel.Identity;
 import fr.tbr.iam.log.IAMLogger;
-import fr.tbr.iam.log.impl.IAMLogManager;
 
 /**
  * @author tbrou
@@ -21,7 +20,7 @@ public class HibernateDAO implements DAO {
 	@Autowired
 	SessionFactory sf;
 
-	private static final IAMLogger logger = IAMLogManager.getIAMLogger(HibernateDAO.class);
+	private static final IAMLogger logger = fr.tbr.iam.log.IAMLogManager.getIAMLogger(HibernateDAO.class);
 	
 	/**
 	 * @param identity

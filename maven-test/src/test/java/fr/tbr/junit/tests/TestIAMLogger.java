@@ -6,7 +6,6 @@ package fr.tbr.junit.tests;
 import org.junit.Test;
 
 import fr.tbr.iam.log.IAMLogger;
-import fr.tbr.iam.log.impl.IAMLogManager;
 
 /**
  * @author tbrou
@@ -14,7 +13,7 @@ import fr.tbr.iam.log.impl.IAMLogManager;
  */
 public class TestIAMLogger {
 	
-	private static final IAMLogger logger = IAMLogManager.getIAMLogger(TestIAMLogger.class);
+	private static final IAMLogger logger = fr.tbr.iam.log.IAMLogManager.getIAMLogger(TestIAMLogger.class);
 	
 	
 	@Test
