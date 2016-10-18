@@ -10,22 +10,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.tbr.iam.log.IAMLogger;
 import fr.tbr.iam.log.impl.IAMLogManager;
-import fr.tbr.iamcore.service.authentication.AuthenticationService;
+import fr.tbr.iamcore.datamodel.Identity;
+import fr.tbr.iamcore.exception.DAOInitializationException;
+import fr.tbr.iamcore.exception.DAOSaveException;
+import fr.tbr.iamcore.service.dao.IdentityFileDAO;
 
 /**
  * Servlet implementation class Login
  */
 
-@WebServlet(name="Login", urlPatterns="/Login")
-public class Login extends HttpServlet {
+@WebServlet(name="IdentityServlet", urlPatterns="/IdAction")
+public class IdentityServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	IAMLogger logger = IAMLogManager.getIAMLogger(Login.class);
+	IAMLogger logger = IAMLogManager.getIAMLogger(IdentityServlet.class);
 
     /**
      * Default constructor. 
      */
-    public Login() {
+    public IdentityServlet() {
     }
 
 	/**
@@ -38,17 +41,17 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String login = request.getParameter("login");
-		String password = request.getParameter("password");
+		String displayName = request.getParameter("displayName");
+		String email = request.getParameter("email");
+		String birthDate = request.getParameter("birthDate");
+		String uid = request.getParameter("uid");
 		
-		logger.debug(login);
-		logger.debug(password);
-		
-		AuthenticationService auth = new AuthenticationService();
-		if (auth.authenticate(login, password)){
-			response.sendRedirect("create.jsp");
-		}else{
-			response.sendRedirect("reconnect.jsp");
+		try {
+			IdentityFileDAO dao = new IdentityFileDAO("/test/identities");
+			dao.save(new Identity(displayName, email, uid));
+		} catch (DAOInitializationException | DAOSaveException e) {
+			// TODO Redirect to error page
+			e.printStackTrace();
 		}
 		
 		
