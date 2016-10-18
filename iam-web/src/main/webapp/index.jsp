@@ -9,13 +9,13 @@
 		<div xmlns="http://www.w3.org/1999/xhtml" class="bs-example">
 			<form role="form" method="post" action="Login">
 				<div class="form-group">
-					<label for="exampleInputEmail1">Login</label> <input type="text"
-						class="form-control" id="exampleInputEmail1"
+					<label for="exampleInputEmail1">Login</label> 
+					<input name="login" type="text" class="form-control" id="exampleInputEmail1"
 						placeholder="Enter Login" />
 				</div>
 				<div class="form-group">
-					<label for="exampleInputPassword1">Password</label> <input
-						type="password" class="form-control" id="exampleInputPassword1"
+					<label for="exampleInputPassword1">Password</label> 
+					<input name="password" type="password" class="form-control" id="exampleInputPassword1"
 						placeholder="Password" />
 				</div>
 
