@@ -23,7 +23,7 @@ import fr.tbr.iamcore.service.dao.IdentityFileDAO;
  */
 
 @WebServlet(name = "IdentityServlet", urlPatterns = "/IdAction")
-public class IdentityServlet extends HttpServlet {
+public class IdentityServlet extends GenericSpringServlet {
 	private static final long serialVersionUID = 1L;
 
 	IAMLogger logger = IAMLogManager.getIAMLogger(IdentityServlet.class);

@@ -17,7 +17,7 @@ import fr.tbr.iamcore.service.authentication.AuthenticationService;
  */
 
 @WebServlet(name="Login", urlPatterns="/Login")
-public class Login extends HttpServlet {
+public class Login extends GenericSpringServlet {
 	private static final long serialVersionUID = 1L;
 	
 	IAMLogger logger = IAMLogManager.getIAMLogger(Login.class);
