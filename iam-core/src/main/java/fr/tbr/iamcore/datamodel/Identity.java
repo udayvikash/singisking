@@ -3,18 +3,37 @@
  */
 package fr.tbr.iamcore.datamodel;
 
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * @author tbrou
  *
  */
+
+@Entity
+@Table(name="IDENTITIES")
 public class Identity {
+	
+	@Id
+	@GeneratedValue
+	long id;
 	
 	private String displayName;
 	private String email;
 	private String uid;
+	private Date birthDate;
 	
 	
-	
+	/**
+	 * 
+	 */
+	public Identity() {
+	}
 	
 	/**
 	 * @param displayName
@@ -73,6 +92,21 @@ public class Identity {
 	public String toString() {
 		return "Identity [displayName=" + displayName + ", email=" + email
 				+ ", uid=" + uid + "]";
+	}
+
+	/**
+	 * @param date
+	 */
+	public void setBirthDate(Date date) {
+		this.birthDate = date;
+		
+	}
+
+	/**
+	 * @return the birthDate
+	 */
+	public final Date getBirthDate() {
+		return birthDate;
 	}
 	
 	

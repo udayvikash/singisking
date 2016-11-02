@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;
 
+import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.hibernate.Session;
@@ -15,12 +16,14 @@ import org.hibernate.Transaction;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import fr.tbr.iam.datamodel.Identity;
-import fr.tbr.iamcore.services.DAO;
+import fr.tbr.iamcore.datamodel.Identity;
+import fr.tbr.iamcore.exception.DAOSaveException;
+import fr.tbr.iamcore.exception.DAOUpdateException;
+import fr.tbr.iamcore.service.dao.DAODeleteException;
+import fr.tbr.iamcore.service.dao.IdentityDAOInterface;
 
 /**
  * @author tbrou
@@ -30,14 +33,14 @@ import fr.tbr.iamcore.services.DAO;
 @ContextConfiguration(locations = "/applicationContext.xml")
 public class TestHibernate {
 
-	@Autowired
+	@Inject
 	DataSource ds;
 
-	@Autowired
+	@Inject
 	SessionFactory sf;
 
-	@Autowired
-	DAO dao;
+	@Inject
+	IdentityDAOInterface dao;
 
 	@Test
 	public void testDataSource() throws SQLException {
@@ -88,7 +91,7 @@ public class TestHibernate {
 	}
 
 	@Test
-	public void testHibernateDAO() {
+	public void testHibernateDAO() throws DAOSaveException, DAOUpdateException, DAODeleteException {
 		Identity identity = new Identity();
 		identity.setDisplayName("Thomas" + Math.random());
 		identity.setBirthDate(new Date());

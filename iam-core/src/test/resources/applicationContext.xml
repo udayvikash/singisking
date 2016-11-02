@@ -32,12 +32,12 @@
         </property> 
          <property name="packagesToScan">
             <list>
-                <value>fr.tbr.iam.datamodel</value>
+                <value>fr.tbr.iamcore.datamodel</value>
             </list>
         </property>    
     </bean>
     
-    <bean id="hibernateDAO" class="fr.tbr.iamcore.services.HibernateDAO" />
+    <bean id="hibernateDAO" class="fr.tbr.iamcore.service.dao.HibernateDAO" />
  
 
 </beans>
