@@ -1,3 +1,8 @@
+#TODO (11/03/2016)
+* Make a search query using Hibernate
+* Prepare all the pages to match the project specifications (login, welcome, search, create, update, delete pages)
+* Check how to navigate and to communicate between those pages
+
 #TODO (11/02/2016)
 * Make the list of all needed steps in order to create the same project from scratch
 * Try to remove the "Spring" word from the custom Servlets hierarchy
