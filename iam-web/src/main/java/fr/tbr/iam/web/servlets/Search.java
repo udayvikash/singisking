@@ -1,7 +1,9 @@
 package fr.tbr.iam.web.servlets;
 
 import java.io.IOException;
+import java.util.Collection;
 
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,48 +12,55 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.tbr.iam.log.IAMLogger;
 import fr.tbr.iam.log.impl.IAMLogManager;
-import fr.tbr.iamcore.service.authentication.AuthenticationService;
+import fr.tbr.iamcore.datamodel.Identity;
+import fr.tbr.iamcore.exception.DAOSearchException;
+import fr.tbr.iamcore.service.dao.IdentityDAOInterface;
 
 /**
  * Servlet implementation class Login
  */
 
-@WebServlet(name="Login", urlPatterns="/Login")
-public class Login extends GenericSpringServlet {
+@WebServlet(name="Search", urlPatterns="/Search")
+public class Search extends GenericSpringServlet {
 	private static final long serialVersionUID = 1L;
 	
-	IAMLogger logger = IAMLogManager.getIAMLogger(Login.class);
+	IAMLogger logger = IAMLogManager.getIAMLogger(Search.class);
+	
+	@Inject
+	IdentityDAOInterface dao;
+	
 
     /**
      * Default constructor. 
      */
-    public Login() {
+    public Search() {
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String displayName = request.getParameter("displayName");
+		String email = request.getParameter("email");
+		logger.info("received this query :  = displayName" + displayName + " email = " + email);
+		try {
+			Collection<Identity> idList = dao.search(new Identity(displayName, email, null));
+			request.getSession().setAttribute("idList", idList);
+		} catch (DAOSearchException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		response.sendRedirect("search.jsp");
+		
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String login = request.getParameter("login");
-		String password = request.getParameter("password");
-		
-		logger.debug(login);
-		logger.debug(password);
-		
-		AuthenticationService auth = new AuthenticationService();
-		if (auth.authenticate(login, password)){
-			response.sendRedirect("welcome.jsp");
-		}else{
-			response.sendRedirect("reconnect.jsp");
-		}
-		
-		
+		doGet(request, response);
 		
 	}
 

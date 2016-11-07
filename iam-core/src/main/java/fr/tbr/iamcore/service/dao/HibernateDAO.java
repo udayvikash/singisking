@@ -5,6 +5,7 @@ package fr.tbr.iamcore.service.dao;
 
 import java.util.Collection;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -73,8 +74,11 @@ public class HibernateDAO implements IdentityDAOInterface {
 	 */
 	@Override
 	public Collection<Identity> search(Identity criteria) throws DAOSearchException {
-		// TODO Auto-generated method stub
-		return null;
+		String hqlString = "from Identity as identity where identity.displayName = :dName";
+		Session session = sf.openSession();
+		Query query = session.createQuery(hqlString);
+		query.setParameter("dName", criteria.getDisplayName());
+		return (Collection<Identity>) query.list();
 	}
 
 	
