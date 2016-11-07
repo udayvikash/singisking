@@ -91,19 +91,50 @@ public class TestHibernate {
 
 		session.close();// TODO do not do that outside of the test case
 	}
-	
+
+	/**
+	 * <pre>
+	 * "Given two identities in the database with one which the displayName is Clement"
+	 * "When we execute the query passing the Clement criteria as the displayName"
+	 * "Then we should have only one result"
+	 * </pre>
+	 * 
+	 * @throws DAOSaveException
+	 * @throws DAODeleteException
+	 */
 	@Test
-	public void testHibernateQueryLanguage() {
-		String hqlString = "from Identity";
-
+	public void testHibernateQueryLanguage() throws DAOSaveException, DAODeleteException {
+		List<?> list = null;
 		Session session = sf.openSession();
-		Query query = session.createQuery(hqlString);
-		List<Object> list = query.list();
-		System.out.println(list);
-		
-		session.close();// TODO do not do that outside of the test case
-	}
+		try {
+			// We have to build the initial state : two identities
+			// "Given two identities in the database with one which the
+			// displayName is Clement"
+			dao.save(new Identity("Clement", "clement@epita.fr", "123"));
+			dao.save(new Identity("Quentin", "quentin@epita.fr", "456"));
 
+			// "When we execute the query passing the Clement criteria as the
+			// displayName"
+			String hqlString = "from Identity as identity where identity.displayName = :dName";
+			
+			Query query = session.createQuery(hqlString);
+			query.setParameter("dName", "Clement");
+			list = query.list();
+
+			// "Then we should have only one result"
+			System.out.println(list);
+			Assert.assertEquals(1, list.size());
+		} finally {
+			if (list != null) {
+				// Finally, leave the database empty
+				for (Object obj : list) {
+					Identity identity = (Identity) obj;
+					dao.delete(identity);
+				}
+			}
+			session.close();// TODO do not do that outside of the test case
+		}
+	}
 
 	@Test
 	public void testHibernateDAO() throws DAOSaveException, DAOUpdateException, DAODeleteException {
