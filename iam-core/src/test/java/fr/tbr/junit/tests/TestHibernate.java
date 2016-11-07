@@ -6,10 +6,12 @@ package fr.tbr.junit.tests;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -89,6 +91,19 @@ public class TestHibernate {
 
 		session.close();// TODO do not do that outside of the test case
 	}
+	
+	@Test
+	public void testHibernateQueryLanguage() {
+		String hqlString = "from Identity";
+
+		Session session = sf.openSession();
+		Query query = session.createQuery(hqlString);
+		List<Object> list = query.list();
+		System.out.println(list);
+		
+		session.close();// TODO do not do that outside of the test case
+	}
+
 
 	@Test
 	public void testHibernateDAO() throws DAOSaveException, DAOUpdateException, DAODeleteException {
