@@ -1,3 +1,6 @@
+#PROJECT DUE DATE
+9th December 2016
+
 #TODO (11/03/2016)
 * Make a search query using Hibernate
 * Prepare all the pages to match the project specifications (login, welcome, search, create, update, delete pages)
