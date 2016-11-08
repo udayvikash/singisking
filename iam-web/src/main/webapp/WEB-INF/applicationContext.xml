@@ -31,7 +31,9 @@
         </property>    
     </bean>
     
-    <bean id="hibernateDAO" class="fr.tbr.iamcore.service.dao.HibernateDAO" />
+    <bean id="hibernateDAO" class="fr.tbr.iamcore.service.dao.HibernateDAO">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
  
 
 </beans>

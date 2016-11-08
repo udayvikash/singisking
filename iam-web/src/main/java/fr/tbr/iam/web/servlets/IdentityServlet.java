@@ -2,6 +2,7 @@ package fr.tbr.iam.web.servlets;
 
 import java.io.IOException;
 
+import javax.inject.Inject;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,9 +15,8 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import fr.tbr.iam.log.IAMLogger;
 import fr.tbr.iam.log.impl.IAMLogManager;
 import fr.tbr.iamcore.datamodel.Identity;
-import fr.tbr.iamcore.exception.DAOInitializationException;
 import fr.tbr.iamcore.exception.DAOSaveException;
-import fr.tbr.iamcore.service.dao.IdentityFileDAO;
+import fr.tbr.iamcore.service.dao.IdentityDAOInterface;
 
 /**
  * Servlet implementation class Login
@@ -26,6 +26,10 @@ import fr.tbr.iamcore.service.dao.IdentityFileDAO;
 public class IdentityServlet extends GenericSpringServlet {
 	private static final long serialVersionUID = 1L;
 
+	
+	@Inject
+	IdentityDAOInterface dao;
+	
 	IAMLogger logger = IAMLogManager.getIAMLogger(IdentityServlet.class);
 
 	/**
@@ -54,9 +58,8 @@ public class IdentityServlet extends GenericSpringServlet {
 		String uid = request.getParameter("uid");
 
 		try {
-			IdentityFileDAO dao = new IdentityFileDAO("/test/identities");
 			dao.save(new Identity(displayName, email, uid));
-		} catch (DAOInitializationException | DAOSaveException e) {
+		} catch (DAOSaveException e) {
 			// TODO Redirect to error page
 			e.printStackTrace();
 		}

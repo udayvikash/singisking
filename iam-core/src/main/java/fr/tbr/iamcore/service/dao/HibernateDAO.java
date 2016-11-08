@@ -5,11 +5,12 @@ package fr.tbr.iamcore.service.dao;
 
 import java.util.Collection;
 
+import javax.inject.Inject;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.tbr.iam.log.IAMLogger;
 import fr.tbr.iam.log.impl.IAMLogManager;
@@ -22,7 +23,7 @@ import fr.tbr.iamcore.exception.DAOSearchException;
  */
 public class HibernateDAO implements IdentityDAOInterface {
 	
-	@Autowired
+	@Inject
 	SessionFactory sf;
 
 	private static final IAMLogger logger = IAMLogManager.getIAMLogger(HibernateDAO.class);
@@ -82,6 +83,12 @@ public class HibernateDAO implements IdentityDAOInterface {
 	}
 
 	
+	public void setSessionFactory(SessionFactory sf){
+		this.sf = sf;
+	}
 	
+	public SessionFactory getSessionFactory(){
+		return this.sf;
+	}
 
 }
