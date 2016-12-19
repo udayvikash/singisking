@@ -28,6 +28,10 @@ public class HibernateDAO implements IdentityDAOInterface {
 
 	private static final IAMLogger logger = IAMLogManager.getIAMLogger(HibernateDAO.class);
 	
+
+	
+	
+	
 	/**
 	 * @param identity
 	 */
@@ -89,6 +93,12 @@ public class HibernateDAO implements IdentityDAOInterface {
 	
 	public SessionFactory getSessionFactory(){
 		return this.sf;
+	}
+
+	@Override
+	public boolean authenticate(String username, String password) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

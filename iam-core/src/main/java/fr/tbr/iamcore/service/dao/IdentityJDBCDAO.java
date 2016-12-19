@@ -173,6 +173,12 @@ public class IdentityJDBCDAO implements IdentityDAOInterface{
 		}
 	}
 
+	@Override
+	public boolean authenticate(String username, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	// insert into "TOM"."IDENTITIES" ("IDENTITY_DISPLAYNAME", "IDENTITY_EMAIL")
 	// values('Quentin Decayeux', 'qdeca@natsystem.fr')
 }

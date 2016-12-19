@@ -31,5 +31,8 @@ public interface IdentityDAOInterface {
 
 	public void delete(Identity identityToDelete)  throws DAODeleteException;
 
+	public boolean authenticate(String username, String password);
+	
+	
 
 }
